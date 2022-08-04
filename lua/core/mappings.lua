@@ -59,7 +59,6 @@ M.general = {
       function()
         require("base46").toggle_theme()
       end,
-
       "   toggle theme",
     },
 
@@ -71,6 +70,17 @@ M.general = {
     ["k"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
     ["<Up>"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
     ["<Down>"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true } },
+
+    -- new buffer
+    ["<S-b>"] = { "<cmd> enew <CR>", "烙 new buffer" },
+
+    -- close buffer + hide terminal buffer
+    ["<leader>x"] = {
+      function()
+        require("core.utils").close_buffer()
+      end,
+      "   close buffer",
+    },
   },
 
   t = {
@@ -92,11 +102,8 @@ M.general = {
 }
 
 M.tabufline = {
-
+  plugin = true,
   n = {
-    -- new buffer
-    ["<S-b>"] = { "<cmd> enew <CR>", "烙 new buffer" },
-
     -- cycle through buffers
     ["<TAB>"] = {
       function()
@@ -126,14 +133,13 @@ M.tabufline = {
 }
 
 M.comment = {
-
+  plugin = true,
   -- toggle comment in both modes
   n = {
     ["<leader>/"] = {
       function()
         require("Comment.api").toggle_current_linewise()
       end,
-
       "蘒  toggle comment",
     },
     ["<C-_>"] = {
@@ -158,6 +164,7 @@ M.comment = {
 }
 
 M.lspconfig = {
+  plugin = true,
   -- See `<cmd> :help vim.lsp.*` for documentation on any of the below functions
 
   n = {
@@ -260,7 +267,7 @@ M.lspconfig = {
 
     ["<leader>fm"] = {
       function()
-        vim.lsp.buf.formatting()
+        vim.lsp.buf.formatting {}
       end,
       "   lsp formatting",
     },
@@ -289,7 +296,7 @@ M.lspconfig = {
 }
 
 M.nvimtree = {
-
+  plugin = true,
   n = {
     -- toggle
     ["<leader>e"] = { "<cmd> NvimTreeToggle <CR>", "   toggle nvimtree" },
@@ -300,6 +307,7 @@ M.nvimtree = {
 }
 
 M.telescope = {
+  plugin = true,
   n = {
     -- find
     ["<leader>ff"] = { "<cmd> Telescope find_files <CR>", "  find files" },
@@ -324,6 +332,7 @@ M.telescope = {
 }
 
 M.nvterm = {
+  plugin = true,
   t = {
     -- toggle in terminal mode
     ["<A-i>"] = {
@@ -390,6 +399,7 @@ M.nvterm = {
 }
 
 M.whichkey = {
+  plugin = true,
   n = {
     ["<leader>wK"] = {
       function()
@@ -408,6 +418,7 @@ M.whichkey = {
 }
 
 M.blankline = {
+  plugin = true,
   n = {
     ["<leader>bl"] = {
       function()
