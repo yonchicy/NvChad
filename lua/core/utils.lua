@@ -77,7 +77,7 @@ M.remove_default_keys = function(user_mappings)
   end
 end
 
-M.load_mappings = function(mappings, mapping_opt)
+M.load_mappings = function(section, mapping_opt)
   -- set mapping function with/without whichkey
   local set_maps
   local whichkey_exists, wk = pcall(require, "which-key")
@@ -94,18 +94,13 @@ M.load_mappings = function(mappings, mapping_opt)
     end
   end
 
-  local mappings_tb = M.load_config().mappings
-  mappings = vim.deepcopy(type(mappings) == "string" and { mappings_tb[mappings] } or mappings_tb)
-
-  local function set_mappings()
-    for name, section in pairs(mappings) do
-      -- skip mapping section with plugin=true
-      if not lazyload_mappings_list[name] then
-        for mode, mode_values in pairs(section) do
-          for keybind, mapping_info in pairs(mode_values) do
-            -- merge default + user opts
-            local default_opts = merge_tb("force", { mode = mode }, mapping_opt or {})
-            local opts = merge_tb("force", default_opts, mapping_info.opts or {})
+  local set_section_map = function(section_values)
+    section_values.plugin = nil
+    for mode, mode_values in pairs(section_values) do
+      for keybind, mapping_info in pairs(mode_values) do
+        -- merge default + user opts
+        local default_opts = merge_tb("force", { mode = mode }, mapping_opt or {})
+        local opts = merge_tb("force", default_opts, mapping_info.opts or {})
 
             if mapping_info.opts then
               mapping_info.opts = nil
@@ -118,9 +113,17 @@ M.load_mappings = function(mappings, mapping_opt)
     end
   end
 
-  vim.defer_fn(function()
-    set_mappings()
-  end, 0)
+  local mappings = require("core.utils").load_config().mappings
+
+  if type(section) == "string" then
+    set_section_map(mappings[section])
+  else
+    for _, sect in pairs(mappings) do
+      if sect.plugin == nil or sect.plugin == false then
+        set_section_map(sect)
+      end
+    end
+  end
 end
 
 -- remove plugins defined in chadrc
@@ -141,7 +144,7 @@ M.merge_plugins = function(default_plugins)
   local user_plugins = M.load_config().plugins.user
 
   -- merge default + user plugin table
-  default_plugins = merge_tb("force", default_plugins, user_plugins)
+  default_plugins = merge_tb("force", default_plugins, user_plugins) or {}
 
   local final_table = {}
 
@@ -155,8 +158,8 @@ end
 
 M.load_override = function(default_table, plugin_name)
   local user_table = M.load_config().plugins.override[plugin_name] or {}
-  user_table = type(user_table) == "table" and user_table or user_table()
-  return merge_tb("force", default_table, user_table)
+  user_table = type(user_table) == "function" and user_table() or user_table
+  return merge_tb("force", default_table, user_table or {}) or {}
 end
 
 M.packer_sync = function(...)
