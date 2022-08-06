@@ -10,6 +10,8 @@ require("base46").load_highlight "treesitter"
 local options = {
   ensure_installed = {
     "lua",
+    "cpp",
+    "rust"
   },
   highlight = {
     enable = true,

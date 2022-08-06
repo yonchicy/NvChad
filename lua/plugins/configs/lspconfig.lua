@@ -71,5 +71,12 @@ lspconfig.sumneko_lua.setup {
     },
   },
 }
+local server = {"clangd","sumneko_lua","rust_analyzer"}
 
+for _ ,lsp in ipairs(server) do 
+  lspconfig[lsp].setup{
+    on_attach=M.on_attach,
+    capabilities=M.capabilities,
+  }
+end
 return M

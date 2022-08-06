@@ -8,27 +8,38 @@ local M = {}
 
 M.general = {
   i = {
+    ["jk"] = { "<ESC>", "escape insert mode" },
+    ["df"] = { "<Right>", " move right" },
+    ["<C-f>"] = { "<Right>", " move right" },
+    ["<C-b>"] = { "<Left>", "  move left" },
+    ["<C-n>"] = { "<Down>", " move down" },
+    ["<C-p>"] = { "<Up>", " move up" },
 
     -- go to  beginning and end
-    ["<C-b>"] = { "<ESC>^i", "論 beginning of line" },
+    ["<C-a>"] = { "<ESC>^i", "論 beginning of line" },
     ["<C-e>"] = { "<End>", "壟 end of line" },
 
-    -- navigate within insert mode
-    ["<C-h>"] = { "<Left>", "  move left" },
-    ["<C-l>"] = { "<Right>", " move right" },
-    ["<C-j>"] = { "<Down>", " move down" },
-    ["<C-k>"] = { "<Up>", " move up" },
   },
 
   n = {
 
+    ["H"] = { '^', "move to head of line" },
+    ["L"] = { '$', "move to end of line" },
     ["<ESC>"] = { "<cmd> noh <CR>", "  no highlight" },
+    ["Q"] = { "<C-w>q", "close windows" },
+    ["<leader>q"] = { "<cmd>wa<CR><cmd>qa<CR>", "close windows" },
 
     -- switch between windows
     ["<C-h>"] = { "<C-w>h", " window left" },
     ["<C-l>"] = { "<C-w>l", " window right" },
     ["<C-j>"] = { "<C-w>j", " window down" },
     ["<C-k>"] = { "<C-w>k", " window up" },
+
+    ["<leader>1"] = { "1<C-w>w", "move to window 1" },
+    ["<leader>2"] = { "2<C-w>w", "move to window 2" },
+    ["<leader>3"] = { "3<C-w>w", "move to window 3" },
+    ["<leader>4"] = { "4<C-w>w", "move to window 4" },
+    ["<leader>5"] = { "5<C-w>w", "move to window 5" },
 
     -- save
     ["<C-s>"] = { "<cmd> w <CR>", "﬚  save file" },
@@ -37,11 +48,11 @@ M.general = {
     ["<C-c>"] = { "<cmd> %y+ <CR>", "  copy whole file" },
 
     -- line numbers
-    ["<leader>n"] = { "<cmd> set nu! <CR>", "   toggle line number" },
-    ["<leader>rn"] = { "<cmd> set rnu! <CR>", "   toggle relative number" },
+    -- ["<leader>n"] = { "<cmd> set nu! <CR>", "   toggle line number" },
+    -- ["<leader>rn"] = { "<cmd> set rnu! <CR>", "   toggle relative number" },
 
     -- update nvchad
-    ["<leader>uu"] = { "<cmd> :NvChadUpdate <CR>", "  update nvchad" },
+    -- ["<leader>uu"] = { "<cmd> :NvChadUpdate <CR>", "  update nvchad" },
 
     ["<leader>tt"] = {
       function()
@@ -63,9 +74,12 @@ M.general = {
 
   t = {
     ["<C-x>"] = { termcodes "<C-\\><C-N>", "   escape terminal mode" },
+    ["Jk"] = { termcodes "<C-\\><C-N>", "   escape terminal mode" },
   },
 
   v = {
+    ["H"] = { '^', "move to head of line" },
+    ["L"] = { '$', "move to end of line" },
     ["j"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true } },
     ["k"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
     ["<Up>"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
@@ -98,7 +112,7 @@ M.tabufline = {
     },
 
     -- close buffer + hide terminal buffer
-    ["<leader>x"] = {
+    ["<leader>bc"] = {
       function()
         require("core.utils").close_buffer()
       end,
@@ -121,9 +135,23 @@ M.comment = {
 
       "蘒  toggle comment",
     },
+    ["<C-_>"] = {
+      function()
+        require("Comment.api").toggle_current_linewise()
+      end,
+
+      "蘒  toggle comment",
+    },
   },
 
   v = {
+    ["<C-_>"] = {
+      function()
+        require("Comment.api").toggle_current_linewise()
+      end,
+
+      "蘒  toggle comment",
+    },
     ["<leader>/"] = {
       "<ESC><cmd>lua require('Comment.api').toggle_linewise_op(vim.fn.visualmode())<CR>",
       "蘒  toggle comment",
@@ -155,6 +183,12 @@ M.lspconfig = {
       end,
       "   lsp hover",
     },
+    ["gh"] = {
+      function()
+        vim.lsp.buf.hover()
+      end,
+      "   lsp hover",
+    },
 
     ["gi"] = {
       function()
@@ -177,7 +211,7 @@ M.lspconfig = {
       "   lsp definition type",
     },
 
-    ["<leader>ra"] = {
+    ["<leader>rn"] = {
       function()
         require("nvchad_ui.renamer").open()
       end,
@@ -219,7 +253,7 @@ M.lspconfig = {
       "   goto_next",
     },
 
-    ["<leader>q"] = {
+    ["<leader>xx"] = {
       function()
         vim.diagnostic.setloclist()
       end,
@@ -260,10 +294,10 @@ M.nvimtree = {
 
   n = {
     -- toggle
-    ["<C-n>"] = { "<cmd> NvimTreeToggle <CR>", "   toggle nvimtree" },
+    ["<leader>e"] = { "<cmd> NvimTreeToggle <CR>", "   toggle nvimtree" },
 
     -- focus
-    ["<leader>e"] = { "<cmd> NvimTreeFocus <CR>", "   focus nvimtree" },
+    ["<C-b>"] = { "<cmd> NvimTreeFocus <CR>", "   focus nvimtree" },
   },
 }
 
@@ -271,6 +305,7 @@ M.telescope = {
   n = {
     -- find
     ["<leader>ff"] = { "<cmd> Telescope find_files <CR>", "  find files" },
+    ["<C-p>"] = { "<cmd> Telescope find_files <CR>", "  find files" },
     ["<leader>fa"] = { "<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>", "  find all" },
     ["<leader>fw"] = { "<cmd> Telescope live_grep <CR>", "   live grep" },
     ["<leader>fb"] = { "<cmd> Telescope buffers <CR>", "  find buffers" },
@@ -376,7 +411,7 @@ M.whichkey = {
 
 M.blankline = {
   n = {
-    ["<leader>bc"] = {
+    ["<leader>bl"] = {
       function()
         local ok, start = require("indent_blankline.utils").get_current_context(
           vim.g.indent_blankline_context_patterns,
