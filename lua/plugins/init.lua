@@ -4,10 +4,22 @@ local plugins = {
 
   ["nvim-lua/plenary.nvim"] = { module = "plenary" },
   ["wbthomason/packer.nvim"] = {
-    cmd = require("core.lazy_load").packer_cmds,
+    cmd = {
+      "PackerSnapshot",
+      "PackerSnapshotRollback",
+      "PackerSnapshotDelete",
+      "PackerInstall",
+      "PackerUpdate",
+      "PackerSync",
+      "PackerClean",
+      "PackerCompile",
+      "PackerStatus",
+      "PackerProfile",
+      "PackerLoad"
+    },
     config = function()
       require "plugins"
-    end,
+    end
   },
   ["NvChad/extensions"] = { module = { "telescope", "nvchad" } },
 
@@ -237,27 +249,15 @@ local plugins = {
   },
 
   -- Speed up deffered plugins
-  ["lewis6991/impatient.nvim"] = { module = "impatient" },
-
-  -- motion
-  ["ggandor/lightspeed.nvim"] = {
-    event = "BufRead",
-  },
-
-
-  --general
-  ["Pocco81/AutoSave.nvim"] = {
-    config = function ()
-      require("auto-save").setup()
+  ["lewis6991/impatient.nvim"] = {
+    event = "VimEnter",
+    config = function()
+      vim.defer_fn(function()
+        local present, impatient = pcall(require, "impatient")
+        if present then impatient.enable_profile() end
+      end, 0)
     end,
   },
-  ["tpope/vim-repeat"] ={
-
-  },
-  ["tpope/vim-surround"]={
-
-  },
-
 }
 
 require("core.packer").run(plugins)
