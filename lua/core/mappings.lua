@@ -117,7 +117,15 @@ M.tabufline = {
       function()
         require("core.utils").tabuflinePrev()
       end,
-      "goto prev buffer",
+      "  goto prev buffer",
+    },
+
+    -- close buffer + hide terminal buffer
+    ["<leader>bc"] = {
+      function()
+        require("core.utils").close_buffer()
+      end,
+      "   close buffer",
     },
 
     -- close buffer + hide terminal buffer
@@ -155,7 +163,10 @@ M.comment = {
 
   v = {
     ["<C-_>"] = {
-      "<ESC><cmd>lua require('Comment.api').toggle_linewise_op(vim.fn.visualmode())<CR>",
+      function()
+        require("Comment.api").toggle_current_linewise()
+      end,
+
       "蘒  toggle comment",
     },
     ["<leader>/"] = {
