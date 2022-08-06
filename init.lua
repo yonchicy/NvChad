@@ -5,5 +5,4 @@ require("core.utils").load_mappings()
 
 -- setup packer + plugins
 require("core.packer").bootstrap()
-require "plugins"
 

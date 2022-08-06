@@ -3,7 +3,24 @@ vim.cmd "packadd packer.nvim"
 local plugins = {
 
   ["nvim-lua/plenary.nvim"] = { module = "plenary" },
-  ["wbthomason/packer.nvim"] = {},
+  ["wbthomason/packer.nvim"] = {
+    cmd = {
+      "PackerSnapshot",
+      "PackerSnapshotRollback",
+      "PackerSnapshotDelete",
+      "PackerInstall",
+      "PackerUpdate",
+      "PackerSync",
+      "PackerClean",
+      "PackerCompile",
+      "PackerStatus",
+      "PackerProfile",
+      "PackerLoad"
+    },
+    config = function()
+      require "plugins"
+    end
+  },
   ["NvChad/extensions"] = { module = { "telescope", "nvchad" } },
 
   ["NvChad/base46"] = {
