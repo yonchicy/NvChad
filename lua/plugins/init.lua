@@ -19,7 +19,7 @@ local plugins = {
     },
     config = function()
       require "plugins"
-    end,
+    end
   },
   ["NvChad/extensions"] = { module = { "telescope", "nvchad" } },
 
