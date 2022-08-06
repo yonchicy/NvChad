@@ -70,17 +70,6 @@ M.general = {
     ["k"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
     ["<Up>"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
     ["<Down>"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true } },
-
-    -- new buffer
-    ["<S-b>"] = { "<cmd> enew <CR>", "烙 new buffer" },
-
-    -- close buffer + hide terminal buffer
-    ["<leader>x"] = {
-      function()
-        require("core.utils").close_buffer()
-      end,
-      "   close buffer",
-    },
   },
 
   t = {
@@ -153,7 +142,10 @@ M.comment = {
 
   v = {
     ["<C-_>"] = {
-      "<ESC><cmd>lua require('Comment.api').toggle_linewise_op(vim.fn.visualmode())<CR>",
+      function()
+        require("Comment.api").toggle_current_linewise()
+      end,
+
       "蘒  toggle comment",
     },
     ["<leader>/"] = {
@@ -258,7 +250,7 @@ M.lspconfig = {
       "   goto_next",
     },
 
-    ["<leader>x"] = {
+    ["<leader>xx"] = {
       function()
         vim.diagnostic.setloclist()
       end,
