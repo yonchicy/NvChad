@@ -14,6 +14,7 @@ if g.vim_version < 8 then
   g.do_filetype_lua = 1
 end
 
+opt.scrolloff=8
 opt.laststatus = 3 -- global statusline
 opt.showmode = false
 
