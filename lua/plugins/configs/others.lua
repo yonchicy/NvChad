@@ -151,6 +151,12 @@ M.gitsigns = function()
       topdelete = { hl = "DiffDelete", text = "‾", numhl = "GitSignsDeleteNr" },
       changedelete = { hl = "DiffChangeDelete", text = "~", numhl = "GitSignsChangeNr" },
     },
+    current_line_blame = true,
+    current_line_blame_opts = {
+      virt_text=true,
+      virt_text_pos = 'eol',
+      delay = 100,
+    }
   }
 
   options = load_override(options, "lewis6991/gitsigns.nvim")
