@@ -108,3 +108,9 @@ vim.schedule(function()
   vim.opt.shadafile = vim.fn.stdpath(g.vim_version > 7 and "state" or "data") .. "/shada/main.shada"
   vim.cmd [[ silent! rsh ]]
 end)
+
+-- hilight yank
+vim.api.nvim_exec([[
+au TextYankPost * lua vim.highlight.on_yank {higroup="IncSearch", timeout=150, on_visual=true}
+]],false)
+
