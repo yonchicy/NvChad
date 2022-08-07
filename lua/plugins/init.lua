@@ -250,6 +250,26 @@ local plugins = {
 
   -- Speed up deffered plugins
   ["lewis6991/impatient.nvim"] = { module = "impatient" },
+
+  -- motion
+  ["ggandor/lightspeed.nvim"] = {
+    event = "BufRead",
+  },
+
+
+  --general
+  ["Pocco81/AutoSave.nvim"] = {
+    config = function ()
+      require("auto-save").setup()
+    end,
+  },
+  ["tpope/vim-repeat"] ={
+
+  },
+  ["tpope/vim-surround"]={
+
+  },
+  ["vim-scripts/argtextobj.vim"] = {},
 }
 
 require("core.packer").run(plugins)
