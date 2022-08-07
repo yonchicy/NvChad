@@ -247,7 +247,7 @@ M.lspconfig = {
       "   goto_next",
     },
 
-    ["<leader>xx"] = {
+    ["<leader>x"] = {
       function()
         vim.diagnostic.setloclist()
       end,
