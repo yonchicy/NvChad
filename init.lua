@@ -9,4 +9,3 @@ end, 0)
 require("core.packer").bootstrap()
 require "plugins"
 
-pcall(require, "custom")

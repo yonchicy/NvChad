@@ -146,10 +146,7 @@ M.comment = {
 
   v = {
     ["<C-_>"] = {
-      function()
-        require("Comment.api").toggle_current_linewise()
-      end,
-
+      "<ESC><cmd>lua require('Comment.api').toggle_linewise_op(vim.fn.visualmode())<CR>",
       "蘒  toggle comment",
     },
     ["<leader>/"] = {
@@ -225,14 +222,14 @@ M.lspconfig = {
       "   lsp code_action",
     },
 
-    ["gr"] = {
-      function()
-        vim.lsp.buf.references()
-      end,
-      "   lsp references",
-    },
+    -- ["gr"] = {
+    --   function()
+    --     vim.lsp.buf.references()
+    --   end,
+    --   "   lsp references",
+    -- },
 
-    ["<leader>f"] = {
+    ["ge"] = {
       function()
         vim.diagnostic.open_float()
       end,
@@ -429,4 +426,60 @@ M.blankline = {
   },
 }
 
+M.symbolsOutLine = {
+  n = {
+    ["<leader>tt"] = {
+      function()
+        vim.cmd "SymbolsOutline"
+      end,
+      "   SymbolsOutline",
+
+    }
+  }
+}
+M.trouble = {
+  n = {
+    ["<leader>xx"] = {
+      function()
+        vim.cmd "TroubleToggle"
+      end,
+      "   Trouble",
+
+    },
+    ["<leader>xw"] = {
+      function()
+        vim.cmd "Trouble workspace_diagnostics"
+      end,
+      "   Trouble workspace_diagnostics",
+    },
+    ["<leader>xd"] = {
+      function()
+        vim.cmd "Trouble document_diagnostics"
+      end,
+      "   Trouble document_diagnostics",
+    },
+    ["<leader>xl"] = {
+      function()
+        vim.cmd "Trouble loclist"
+      end,
+      "   Trouble loclist",
+    },
+    ["<leader>xq"] = {
+      function()
+        vim.cmd "Trouble quickfix"
+      end,
+      "   Trouble quickfix",
+    },
+    ["gr"] = {
+      function()
+        vim.cmd "Trouble lsp_references"
+      end,
+      "   Trouble lsp_references",
+    },
+  }
+}
 return M
+-- Lua
+-- vim.api.nvim_set_keymap("n", "gR", "<cmd>Trouble lsp_references<cr>",
+--   {silent = true, noremap = true}
+-- )

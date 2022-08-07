@@ -99,7 +99,22 @@ local plugins = {
       require "plugins.configs.lspconfig"
     end,
   },
+  ["jose-elias-alvarez/null-ls.nvim"] = {
+  after = "nvim-lspconfig",
+  config = function()
+    require "plugins.configs.null-ls"
+  end,
+},
 
+-- lsp enhancement
+ ["simrat39/symbols-outline.nvim"] = {
+   after = "nvim-lspconfig",
+   -- config = function()
+ },
+ ["folke/trouble.nvim"] = {
+   after = "nvim-lspconfig",
+ },
+-- load it after nvim-lspconfig cuz we lazy loaded lspconfig
   -- load luasnips + cmp related in insert mode only
 
   ["rafamadriz/friendly-snippets"] = {
@@ -189,6 +204,27 @@ local plugins = {
       require "plugins.configs.whichkey"
     end,
   },
+
+
+  -- motion
+  ["ggandor/lightspeed.nvim"] = {
+    event = "BufRead",
+  },
+
+
+  --general
+  ["Pocco81/AutoSave.nvim"] = {
+    config = function ()
+      require("auto-save").setup()
+    end,
+  },
+  ["tpope/vim-repeat"] ={
+
+  },
+  ["tpope/vim-surround"]={
+
+  },
+  ["vim-scripts/argtextobj.vim"] = {},
 }
 
 require("core.packer").run(plugins)
