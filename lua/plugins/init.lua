@@ -227,6 +227,8 @@ local plugins = {
     end,
   },
 
+  -- Speed up deffered plugins
+  ["lewis6991/impatient.nvim"] = { module = "impatient" },
 
   -- motion
   ["ggandor/lightspeed.nvim"] = {
