@@ -78,6 +78,9 @@ local plugins = {
       require "plugins.configs.treesitter"
     end,
   },
+  ["nvim-treesitter/nvim-treesitter-textobjects"] = {
+    after = "nvim-treesitter",
+  },
 
   -- git stuff
   ["lewis6991/gitsigns.nvim"] = {
@@ -248,7 +251,7 @@ local plugins = {
   ["tpope/vim-surround"]={
 
   },
-  ["vim-scripts/argtextobj.vim"] = {},
+
 }
 
 require("core.packer").run(plugins)

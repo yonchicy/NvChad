@@ -17,6 +17,15 @@ local options = {
     enable = true,
     use_languagetree = true,
   },
+  textobjects = {
+    select = {
+      enable=true,
+      lookahead = true,
+      keymaps  = {
+        ["ia"] = "@parameter.inner",
+      }
+    }
+  }
 }
 
 -- check for any override
