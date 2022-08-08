@@ -242,7 +242,7 @@ M.lspconfig = {
       function()
         vim.lsp.buf.references()
       end,
-      "lsp references",
+      "   lsp references",
     },
 
     ["ge"] = {
