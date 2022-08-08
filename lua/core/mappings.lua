@@ -230,12 +230,12 @@ M.lspconfig = {
       "   lsp code_action",
     },
 
-    -- ["gr"] = {
-    --   function()
-    --     vim.lsp.buf.references()
-    --   end,
-    --   "   lsp references",
-    -- },
+    ["gr"] = {
+      function()
+        vim.lsp.buf.references()
+      end,
+      "   lsp references",
+    },
 
     ["ge"] = {
       function()
