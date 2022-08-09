@@ -28,7 +28,7 @@ M.general = {
     ["<ESC>"] = { "<cmd> noh <CR>", "  no highlight" },
     ["Q"] = { "<C-w>q", "close windows" },
     ["<leader>q"] = { "<cmd>wa<CR><cmd>q<CR>", "close windows" },
-    ["wq"] = { "<cmd>wa<CR><cmd>qa<CR>", "save and exit vim" },
+    ["WQ"] = { "<cmd>wa<CR><cmd>qa<CR>", "save and exit vim" },
 
     -- switch between windows
     ["<C-h>"] = { "<C-w>h", " window left" },
