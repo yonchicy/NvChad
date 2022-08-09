@@ -31,10 +31,10 @@ M.general = {
     ["WQ"] = { "<cmd>wa<CR><cmd>qa<CR>", "save and exit vim" },
 
     -- switch between windows
-    ["<C-h>"] = { "<C-w>h", " window left" },
-    ["<C-l>"] = { "<C-w>l", " window right" },
-    ["<C-j>"] = { "<C-w>j", " window down" },
-    ["<C-k>"] = { "<C-w>k", " window up" },
+    ["<C-h>"] = { "<C-w>h", "window left" },
+    ["<C-l>"] = { "<C-w>l", "window right" },
+    ["<C-j>"] = { "<C-w>j", "window down" },
+    ["<C-k>"] = { "<C-w>k", "window up" },
 
     ["<leader>1"] = { "1<C-w>w", "move to window 1" },
     ["<leader>2"] = { "2<C-w>w", "move to window 2" },
@@ -43,10 +43,10 @@ M.general = {
     ["<leader>5"] = { "5<C-w>w", "move to window 5" },
 
     -- save
-    ["<C-s>"] = { "<cmd> w <CR>", "﬚  save file" },
+    ["<C-s>"] = { "<cmd> w <CR>", "save file" },
 
     -- Copy all
-    ["<C-c>"] = { "<cmd> %y+ <CR>", "  copy whole file" },
+    ["<C-c>"] = { "<cmd> %y+ <CR>", "copy whole file" },
 
     -- line numbers
     -- ["<leader>n"] = { "<cmd> set nu! <CR>", "   toggle line number" },
@@ -59,7 +59,7 @@ M.general = {
       function()
         require("base46").toggle_theme()
       end,
-      "   toggle theme",
+      "toggle theme",
     },
 
     -- Allow moving the cursor through wrapped lines with j, k, <Up> and <Down>
@@ -72,14 +72,14 @@ M.general = {
     ["<Down>"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true } },
 
     -- new buffer
-    ["<S-b>"] = { "<cmd> enew <CR>", "烙 new buffer" },
+    ["<S-b>"] = { "<cmd> enew <CR>", "new buffer" },
 
     -- close buffer + hide terminal buffer
     ["<leader>x"] = {
       function()
         require("core.utils").close_buffer()
       end,
-      "   close buffer",
+      "close buffer",
     },
   },
 
@@ -103,20 +103,21 @@ M.general = {
 
 M.tabufline = {
   plugin = true,
+
   n = {
     -- cycle through buffers
     ["<TAB>"] = {
       function()
         require("core.utils").tabuflineNext()
       end,
-      "  goto next buffer",
+      "goto next buffer",
     },
 
     ["<S-Tab>"] = {
       function()
         require("core.utils").tabuflinePrev()
       end,
-      "  goto prev buffer",
+      "goto prev buffer",
     },
 
     -- close buffer + hide terminal buffer
@@ -128,19 +129,20 @@ M.tabufline = {
     },
 
     -- pick buffers via numbers
-    ["<Bslash>"] = { "<cmd> TbufPick <CR>", "  Pick buffer" },
+    ["<Bslash>"] = { "<cmd> TbufPick <CR>", "Pick buffer" },
   },
 }
 
 M.comment = {
   plugin = true,
+
   -- toggle comment in both modes
   n = {
     ["<leader>/"] = {
       function()
         require("Comment.api").toggle_current_linewise()
       end,
-      "蘒  toggle comment",
+      "toggle comment",
     },
     ["<C-_>"] = {
       function()
@@ -158,13 +160,14 @@ M.comment = {
     },
     ["<leader>/"] = {
       "<ESC><cmd>lua require('Comment.api').toggle_linewise_op(vim.fn.visualmode())<CR>",
-      "蘒  toggle comment",
+      "toggle comment",
     },
   },
 }
 
 M.lspconfig = {
   plugin = true,
+
   -- See `<cmd> :help vim.lsp.*` for documentation on any of the below functions
 
   n = {
@@ -172,21 +175,21 @@ M.lspconfig = {
       function()
         vim.lsp.buf.declaration()
       end,
-      "   lsp declaration",
+      "lsp declaration",
     },
 
     ["gd"] = {
       function()
         vim.lsp.buf.definition()
       end,
-      "   lsp definition",
+      "lsp definition",
     },
 
     ["K"] = {
       function()
         vim.lsp.buf.hover()
       end,
-      "   lsp hover",
+      "lsp hover",
     },
     ["gh"] = {
       function()
@@ -199,104 +202,105 @@ M.lspconfig = {
       function()
         vim.lsp.buf.implementation()
       end,
-      "   lsp implementation",
+      "lsp implementation",
     },
 
     ["<leader>ls"] = {
       function()
         vim.lsp.buf.signature_help()
       end,
-      "   lsp signature_help",
+      "lsp signature_help",
     },
 
     ["<leader>D"] = {
       function()
         vim.lsp.buf.type_definition()
       end,
-      "   lsp definition type",
+      "lsp definition type",
     },
 
     ["<leader>rn"] = {
       function()
         require("nvchad_ui.renamer").open()
       end,
-      "   lsp rename",
+      "lsp rename",
     },
 
     ["<leader>ca"] = {
       function()
         vim.lsp.buf.code_action()
       end,
-      "   lsp code_action",
+      "lsp code_action",
     },
 
     ["gr"] = {
       function()
         vim.lsp.buf.references()
       end,
-      "   lsp references",
+      "lsp references",
     },
 
     ["ge"] = {
       function()
         vim.diagnostic.open_float()
       end,
-      "   floating diagnostic",
+      "floating diagnostic",
     },
 
     ["[d"] = {
       function()
         vim.diagnostic.goto_prev()
       end,
-      "   goto prev",
+      "goto prev",
     },
 
     ["d]"] = {
       function()
         vim.diagnostic.goto_next()
       end,
-      "   goto_next",
+      "goto_next",
     },
 
     ["<leader>x"] = {
       function()
         vim.diagnostic.setloclist()
       end,
-      "   diagnostic setloclist",
+      "diagnostic setloclist",
     },
 
     ["<leader>fm"] = {
       function()
         vim.lsp.buf.formatting {}
       end,
-      "   lsp formatting",
+      "lsp formatting",
     },
 
     ["<leader>wa"] = {
       function()
         vim.lsp.buf.add_workspace_folder()
       end,
-      "   add workspace folder",
+      "add workspace folder",
     },
 
     ["<leader>wr"] = {
       function()
         vim.lsp.buf.remove_workspace_folder()
       end,
-      "   remove workspace folder",
+      "remove workspace folder",
     },
 
     ["<leader>wl"] = {
       function()
         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
       end,
-      "   list workspace folders",
+      "list workspace folders",
     },
   },
 }
 
 M.nvimtree = {
   plugin = true,
+
   n = {
     -- toggle
     ["<leader>e"] = { "<cmd> NvimTreeToggle <CR>", "   toggle nvimtree" },
@@ -308,6 +312,7 @@ M.nvimtree = {
 
 M.telescope = {
   plugin = true,
+
   n = {
     -- find
     ["<leader>ff"] = { "<cmd> Telescope find_files <CR>", "  find files" },
@@ -320,40 +325,41 @@ M.telescope = {
     ["<leader>tk"] = { "<cmd> Telescope keymaps <CR>", "   show keys" },
 
     -- git
-    ["<leader>cm"] = { "<cmd> Telescope git_commits <CR>", "   git commits" },
-    ["<leader>gt"] = { "<cmd> Telescope git_status <CR>", "  git status" },
+    ["<leader>cm"] = { "<cmd> Telescope git_commits <CR>", "git commits" },
+    ["<leader>gt"] = { "<cmd> Telescope git_status <CR>", "git status" },
 
     -- pick a hidden term
-    ["<leader>pt"] = { "<cmd> Telescope terms <CR>", "   pick hidden term" },
+    ["<leader>pt"] = { "<cmd> Telescope terms <CR>", "pick hidden term" },
 
     -- theme switcher
-    ["<leader>th"] = { "<cmd> Telescope themes <CR>", "   nvchad themes" },
+    ["<leader>th"] = { "<cmd> Telescope themes <CR>", "nvchad themes" },
   },
 }
 
 M.nvterm = {
   plugin = true,
+
   t = {
     -- toggle in terminal mode
     ["<A-i>"] = {
       function()
         require("nvterm.terminal").toggle "float"
       end,
-      "   toggle floating term",
+      "toggle floating term",
     },
 
     ["<A-h>"] = {
       function()
         require("nvterm.terminal").toggle "horizontal"
       end,
-      "   toggle horizontal term",
+      "toggle horizontal term",
     },
 
     ["<A-v>"] = {
       function()
         require("nvterm.terminal").toggle "vertical"
       end,
-      "   toggle vertical term",
+      "toggle vertical term",
     },
   },
 
@@ -363,21 +369,21 @@ M.nvterm = {
       function()
         require("nvterm.terminal").toggle "float"
       end,
-      "   toggle floating term",
+      "toggle floating term",
     },
 
     ["<A-h>"] = {
       function()
         require("nvterm.terminal").toggle "horizontal"
       end,
-      "   toggle horizontal term",
+      "toggle horizontal term",
     },
 
     ["<A-v>"] = {
       function()
         require("nvterm.terminal").toggle "vertical"
       end,
-      "   toggle vertical term",
+      "toggle vertical term",
     },
 
     -- new
@@ -386,39 +392,41 @@ M.nvterm = {
       function()
         require("nvterm.terminal").new "horizontal"
       end,
-      "   new horizontal term",
+      "new horizontal term",
     },
 
     ["<leader>v"] = {
       function()
         require("nvterm.terminal").new "vertical"
       end,
-      "   new vertical term",
+      "new vertical term",
     },
   },
 }
 
 M.whichkey = {
   plugin = true,
+
   n = {
     ["<leader>wK"] = {
       function()
         vim.cmd "WhichKey"
       end,
-      "   which-key all keymaps",
+      "which-key all keymaps",
     },
     ["<leader>wk"] = {
       function()
         local input = vim.fn.input "WhichKey: "
         vim.cmd("WhichKey " .. input)
       end,
-      "   which-key query lookup",
+      "which-key query lookup",
     },
   },
 }
 
 M.blankline = {
   plugin = true,
+
   n = {
     ["<leader>bl"] = {
       function()
@@ -433,7 +441,7 @@ M.blankline = {
         end
       end,
 
-      "  Jump to current_context",
+      "Jump to current_context",
     },
   },
 }
